@@ -1,0 +1,3 @@
+services:
+  household-registration-system:
+    image: mdsol/java17-jdk
