@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Family;
+import com.example.demo.request.FamilyGetRequest;
 import com.example.demo.request.FamilySaveRequest;
 import com.example.demo.service.FamilyService;
 import lombok.RequiredArgsConstructor;
@@ -21,15 +22,16 @@ public class FamilyController {
         return ResponseEntity.status(HttpStatus.OK).body("新增成功");
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Family> findById(@PathVariable("id") Long id) {
-//        Family familyByAddress = familyService.findFamilyByAddress(id);
-//        return ResponseEntity.ok().body(familyByAddress);
-//    }
+    @GetMapping("{id}")
+    public ResponseEntity<Family> findByFamilyId(@PathVariable("id") Long id) {
+        System.out.println(id);
+        Family familyByAddress = familyService.findById(id);
+        return ResponseEntity.ok().body(familyByAddress);
+    }
 
-    @GetMapping("/{familyName}")
-    public ResponseEntity<Family> findById(@PathVariable("familyName") String familyName) {
-        Family byFamilyName = familyService.findByFamilyName(familyName);
+    @GetMapping()
+    public ResponseEntity<Family> findByFamilyName(@RequestBody FamilyGetRequest familyGetRequest) {
+        Family byFamilyName = familyService.findByFamilyName(familyGetRequest.getFamilyName());
         return ResponseEntity.ok().body(byFamilyName);
     }
 

@@ -12,10 +12,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Family {
-    String name;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    String name;
 
     @OneToOne(cascade = CascadeType.ALL)
     Mother mother;

@@ -9,8 +9,9 @@ import com.example.demo.request.FamilySaveRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -40,12 +41,13 @@ public class FamilyService {
         familyDao.save(family);
     }
 
-    public Family findFamilyByAddress(Long id) {
-        return familyDao.findById(id).orElse(new Family());
+    public Family findById(Long id) {
+        Optional<Family> byId = familyDao.findById(id);
+        return byId.get();
     }
 
-    public Family findByFamilyName(String familyName){
-        return familyDao.findByFather_Name(familyName);
+    public Family findByFamilyName(String familyName) {
+        return familyDao.findFamilyByName(familyName);
     }
 
 
